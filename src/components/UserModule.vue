@@ -9,7 +9,8 @@
 import UserCard from './UserCard.vue'
 
 export default {
-	name: UserModule,
-	component: UserCard	
+	components: {
+		UserCard	
+	}
 }
 </script>

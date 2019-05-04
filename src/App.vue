@@ -16,15 +16,21 @@
     </v-toolbar> -->
 
     <v-content>
-      <router-link to="/home">home</router-link>
-      <v-tab>
-      </v-tab>
-      <router-link to="/about">about</router-link>
+      <v-layout
+        justify-center
+        mt-2
+        mb-3
+      >
+        <router-link to="/">Modules</router-link>
+        <v-tab></v-tab>
+        <router-link to="/users">Users</router-link>
+      </v-layout>
+
+      <v-layout row wrap>
+        <router-view></router-view>
+      </v-layout>
     </v-content>
-    <v-content>
-      <router-view>
-      </router-view>
-    </v-content>
+    
   </v-app>
 </template>
 
