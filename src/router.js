@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import UserModule from './views/UserModule.vue'
+import Todo from '../../todo-app/src/components/todo.vue'
 
 Vue.use(Router)
 
@@ -10,8 +11,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'modules'
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: UserModule
     },
     {
       path: '/about',
