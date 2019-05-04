@@ -1,11 +1,11 @@
 <template>
 	<v-content>
 		<v-card 
-		
 			max-width	= "500"
+			:style		= "{ border: '4px solid ' + [isChosen ? 'transparent' : '#00A6F2'] }"
 			class			= "mx-auto pb-3 pt-2"
-			selected
-			dark 
+			@click		= "onCardClick()"
+			dark 		
 		>
 			<v-card-title	class="title font-weight-regular">
 				<span>User 1</span>
@@ -22,7 +22,7 @@
 							>
 								<span class="mb-2">FIRST NAME</span>
 								<span class="mb-2">SECOND NAME</span>
-								<span>ADDRESS</span>
+								<span class="mb-2">ADDRESS</span>
 							</v-layout>
 						</v-flex>
 						<v-flex xs9>
@@ -59,11 +59,23 @@
 <script>
 export default {
 	data () {
-
+		return {
+			isChosen: false
+		}
 	},
-	methods () {
-
+	methods: {
+		onCardClick () {
+			this.isChosen = !this.isChosen;
+		}
 	}
 }
 </script>
+
+<style>
+
+	.setBorder {
+		border: 10px solid blue;
+	}
+</style>
+
 
