@@ -1,16 +1,20 @@
-<template>
-	<v-content>
+<template >
+	<v-content v-if="isExist">
 		<v-card 
 			max-width	= "500"
-			:style		= "{ border: '4px solid ' + [isChosen ? 'transparent' : '#00A6F2'] }"
-			class			= "mx-auto pb-3 pt-2"
-			@click		= "onCardClick()"
+			:style		= "{ border: '4px solid ' + [isChosen ? SELECT_COLOR : 'transparent'] }"
+			class			= "mx-auto pb-3 pt-2 mb-1"
+			@click		= "isChosen = !isChosen"
 			dark 		
 		>
 			<v-card-title	class="title font-weight-regular">
-				<span>User 1</span>
+				<v-text-field
+					label="label"
+					:value="username"
+					@input="$emit('update-username', $event)"
+				></v-text-field>
 				<v-spacer></v-spacer>
-				<span>ID</span>
+				<span>{{ id }}</span>
 			</v-card-title>
 			<v-card-text class="body-1">
 				<v-content>
@@ -37,7 +41,8 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-btn 
-					color="error"
+					color	 = "error"
+					@click = "$emit('delete-user')"	
 					left
 					large
 					round
@@ -58,24 +63,20 @@
 
 <script>
 export default {
+	props: ['username', 'id'],
 	data () {
 		return {
-			isChosen: false
+			SELECT_COLOR: '#00A6F2',
+			isChosen: false,
+			isExist: true,
+			isEditing: false,
 		}
 	},
 	methods: {
-		onCardClick () {
-			this.isChosen = !this.isChosen;
-		}
+
 	}
 }
 </script>
 
-<style>
-
-	.setBorder {
-		border: 10px solid blue;
-	}
-</style>
 
 
