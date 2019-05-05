@@ -19,6 +19,13 @@ export default new Vuex.Store({
         fName: 'test2',
         sName: 'test2',
         address: 'ph street 22-3'
+      },
+      {
+        id: 2,
+        username: 'user 3',
+        fName: 'test3',
+        sName: 'test3',
+        address: 'ph street 22-3 new street tester 3'
       }
     ]
   },

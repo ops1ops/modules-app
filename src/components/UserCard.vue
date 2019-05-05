@@ -13,6 +13,7 @@
 					:value = "username"
 					v-if	 = "isEditing"
 					v-model= "usernameInput"
+					:error-messages="required($v.usernameInput.required)"
 					clearable
 				></v-text-field>
 				<span v-else>{{ username }}</span>
@@ -28,7 +29,8 @@
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ firstname }}</span>
 							<v-text-field
-								class="pa-0 ma-0"
+								:error-messages="required($v.firstnameInput.required)"
+								class="pa-0 ma-0 body-1"
 								absolute
 								clearable
 								:value="firstname"
@@ -47,7 +49,8 @@
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ secondname }}</span>
 							<v-text-field
-								class="pa-0 ma-0"
+								:error-messages="required($v.secondnameInput.required)"
+								class="pa-0 ma-0 body-1"
 								clearable
 								absolute
 								:value="secondname"
@@ -60,20 +63,24 @@
 						</v-flex>
 					</v-layout>
 					<v-layout row wrap class="">
-						<v-flex xs3 class="grey--text text-xs-center">
+						<v-flex 
+							class="grey--text text-xs-center"
+							xs3	
+						>
 							ADDRESS
 						</v-flex>
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ address }}</span>
 							<v-text-field
-								class="pa-0 ma-0"
+								class					 ="pa-0 ma-0 body-1"
+								name					 ="name"
+								id						 ="id"
+								:error-messages="required($v.addressInput.required)"
+								:value				 ="address"
+								v-model				 ="addressInput"
 								absolute
-								:value="address"
-								v-model="addressInput"
 								top
 								clearable
-								name="name"
-								id="id"
 								v-else
 							></v-text-field>
 						</v-flex>
@@ -92,7 +99,7 @@
 				>DELETE</v-btn>
 				<v-btn 
 					color	 = "info"
-					@click ="isEditing = !isEditing; isChosen = true;"	
+					@click ="onCancelEdit()"	
 					v-else
 					left
 					large
@@ -100,9 +107,9 @@
 					outline
 				>CANCEL</v-btn>
 				<v-btn 
-					color	="info"
-					@click="isEditing = !isEditing; isChosen = true;"
-					v-if="!isEditing"
+					color		="info"
+					@click	="isEditing = !isEditing;isChosen = true;"
+					v-if		="!isEditing"
 					absolute
 					large
 					right
@@ -110,8 +117,9 @@
 					outline
 				>EDIT</v-btn>
 				<v-btn 
-					color	="info"
-					@click="onSave($event); isChosen = true;"
+					@click		="onSave($event); isChosen = true;"
+					:disabled	="!isEditValid"
+					color			="info"
 					v-else
 					absolute
 					large
@@ -125,10 +133,12 @@
 </template>
 
 <script>
+import {required} from 'vuelidate/lib/validators'
+
 export default {
 	props: [
+		'id',
 		'username', 
-		'id', 
 		'firstname',
 		'secondname',
 		'address'
@@ -143,10 +153,48 @@ export default {
 			SELECT_COLOR: '#00A6F2',
 			isChosen: false,
 			isExist: true,
-			isEditing: false,
+			isEditing: false
+		}
+	},
+	validations: {
+		usernameInput: {
+			required
+		},
+		firstnameInput: {
+			required
+		},
+		secondnameInput: {
+			required
+		},
+		addressInput: {
+			required
+		}
+	},
+	computed: {
+		isEditValid () {
+			return (
+				this.$v.usernameInput.required &&
+				this.$v.firstnameInput.required &&
+				this.$v.secondnameInput.required &&
+				this.$v.addressInput.required
+			);
 		}
 	},
 	methods: {
+		// :error-messages = []
+		required (condition) {
+			if (!condition) return 'Required';
+			else return "";   
+		},
+		onCancelEdit () {
+			this.isEditing = !this.isEditing;
+			this.isChosen = true;
+			//return prev info by pressing cancel
+			this.usernameInput = this.username;
+			this.firstnameInput = this.firstname;
+			this.secondnameInput = this.secondname;
+			this.addressInput = this.address;
+		},
 		onSave () {
 			this.isEditing = !this.isEditing;
 			this.$emit('update-profile', {
