@@ -9,9 +9,11 @@
 		>
 			<v-card-title	class="title font-weight-regular">
 				<v-text-field
-					class="pt-0 mb-0 title font-weight-regular"
-					:value="username"
-					v-if="isEditing"
+					class	 = "pa-0 ma-0 title font-weight-regular"
+					:value = "username"
+					v-if	 = "isEditing"
+					v-model= "usernameInput"
+					clearable
 				></v-text-field>
 				<span v-else>{{ username }}</span>
 				<v-spacer v-show="!isEditing"></v-spacer>
@@ -24,17 +26,18 @@
 							FIRST NAME
 						</v-flex>
 						<v-flex xs9>
-							<span class="mb-3" v-if="!isEditing">field1</span>
+							<span v-if="!isEditing">{{ firstname }}</span>
 							<v-text-field
 								class="pa-0 ma-0"
 								absolute
 								clearable
+								:value="firstname"
 								top
 								name="name"
 								id="id"
+								v-model="firstnameInput"
 								v-else
 							></v-text-field>
-							
 						</v-flex>
 					</v-layout>
 					<v-layout row wrap :class="[isEditing ? '' : 'pb-3']">
@@ -42,11 +45,13 @@
 							SECOND NAME
 						</v-flex>
 						<v-flex xs9>
-							<span class="mb-2" v-if="!isEditing">field2</span>
+							<span v-if="!isEditing">{{ secondname }}</span>
 							<v-text-field
 								class="pa-0 ma-0"
 								clearable
 								absolute
+								:value="secondname"
+								v-model="secondnameInput"
 								top
 								name="name"
 								id="id"
@@ -59,10 +64,12 @@
 							ADDRESS
 						</v-flex>
 						<v-flex xs9>
-							<span class="mb-2" v-if="!isEditing">field3</span>
+							<span v-if="!isEditing">{{ address }}</span>
 							<v-text-field
 								class="pa-0 ma-0"
 								absolute
+								:value="address"
+								v-model="addressInput"
 								top
 								clearable
 								name="name"
@@ -85,7 +92,7 @@
 				>DELETE</v-btn>
 				<v-btn 
 					color	 = "info"
-					@click ="isEditing = !isEditing"	
+					@click ="isEditing = !isEditing; isChosen = true;"	
 					v-else
 					left
 					large
@@ -94,7 +101,7 @@
 				>CANCEL</v-btn>
 				<v-btn 
 					color	="info"
-					@click="isEditing = !isEditing"
+					@click="isEditing = !isEditing; isChosen = true;"
 					v-if="!isEditing"
 					absolute
 					large
@@ -104,7 +111,7 @@
 				>EDIT</v-btn>
 				<v-btn 
 					color	="info"
-					@click="onSave($event)"
+					@click="onSave($event); isChosen = true;"
 					v-else
 					absolute
 					large
@@ -119,9 +126,20 @@
 
 <script>
 export default {
-	props: ['username', 'id', 'firstname'],
+	props: [
+		'username', 
+		'id', 
+		'firstname',
+		'secondname',
+		'address'
+	],
 	data () {
 		return {
+			usernameInput: this.username,
+			firstnameInput: this.firstname,
+			secondnameInput: this.secondname,
+			addressInput: this.address,
+
 			SELECT_COLOR: '#00A6F2',
 			isChosen: false,
 			isExist: true,
@@ -129,9 +147,14 @@ export default {
 		}
 	},
 	methods: {
-		onSave (e) {
+		onSave () {
 			this.isEditing = !this.isEditing;
-			this.$emit('update-username', e);
+			this.$emit('update-profile', {
+				username: this.usernameInput,
+				firstname: this.firstnameInput,
+				secondname: this.secondnameInput,
+				address: this.addressInput
+			});
 		}
 	}
 }

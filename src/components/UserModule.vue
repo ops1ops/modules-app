@@ -6,9 +6,10 @@
 			:id							="getUserId(index)"
 			:username				="getUsername(index)"
 			:firstname			="getFirstname(index)"
+			:secondname			="getSecondname(index)"
+			:address				="getAddress(index)"
 			@delete-user		="deleteUser(getUserId(index))"
-			@update-username="updateUsername($event, getUserId(index))"
-
+			@update-profile ="updateProfile($event, getUserId(index))"
 		></UserCard>
 	</v-content>
 </template>
@@ -34,20 +35,28 @@ export default {
 		getFirstname (index) {
 			return this.$store.getters.users[index]["fName"];
 		},
+		getSecondname (index) {
+			return this.$store.getters.users[index]["sName"];
+		},
+		getAddress (index) {
+			return this.$store.getters.users[index]["address"];
+		},
 		getUserId (index) {
 			return this.$store.getters.users[index]["id"];
 		},
 		deleteUser(id) {
 			this.$store.commit('DELETE_USER', id);
 		},
-		updateUsername (username, id) {
-			this.$store.commit('UPDATE_USERNAME', {
+		updateProfile (userObject, id) {
+			console.log(userObject);
+			this.$store.commit('UPDATE_PROFILE', {
 				id: id,
-				username: username
-			})
+				username: userObject.username,
+				firstname: userObject.firstname,
+				secondname: userObject.secondname,
+				address: userObject.address
+			});
 		}
-		
 	}
-	
 }
 </script>
