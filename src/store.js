@@ -7,25 +7,25 @@ export default new Vuex.Store({
   state: {
     users: [
       {
-        id: 0,
+        id      : 0,
         username: 'user 1',
-        fName: 'alex',
-        sName: 'qwe',
-        address: 'mt street 2-123'
+        fName   : 'alex',
+        sName   : 'qwe',
+        address : 'mt street 2-123'
       },
       {
-        id: 1,
+        id      : 1,
         username: 'user 2',
-        fName: 'test2',
-        sName: 'test2',
-        address: 'ph street 22-3'
+        fName   : 'test2',
+        sName   : 'test2',
+        address : 'ph street 22-3'
       },
       {
-        id: 2,
+        id      : 2,
         username: 'user 3',
-        fName: 'test3',
-        sName: 'test3',
-        address: 'ph street 22-3 new street tester 3'
+        fName   : 'test3',
+        sName   : 'test3',
+        address : 'ph street 22-3 new street tester 3'
       }
     ]
   },
@@ -46,15 +46,14 @@ export default new Vuex.Store({
         user => user.id === obj.id
       );
       state.users[index]["username"] = obj.username;
-      state.users[index]["fName"] = obj.firstname;
-      state.users[index]["sName"] = obj.secondname;
-      state.users[index]["address"] = obj.address;
+      state.users[index]["fName"]    = obj.firstname;
+      state.users[index]["sName"]    = obj.secondname;
+      state.users[index]["address"]  = obj.address;
     }
   },
   actions: {
     // deleteUser ({commit}, id) {
     //   commit('DELETE_USER', id);
     // }
-
   }
 })

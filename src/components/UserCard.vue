@@ -9,11 +9,11 @@
 		>
 			<v-card-title	class="title font-weight-regular">
 				<v-text-field
-					class	 = "pa-0 ma-0 title font-weight-regular"
-					:value = "username"
-					v-if	 = "isEditing"
-					v-model= "usernameInput"
-					:error-messages="required($v.usernameInput.required)"
+					class	 					= "pa-0 ma-0 title font-weight-regular"
+					:value 					= "username"
+					v-if	 					= "isEditing"
+					v-model					= "usernameInput"
+					:error-messages = "required($v.usernameInput.required)"
 					clearable
 				></v-text-field>
 				<span v-else>{{ username }}</span>
@@ -22,59 +22,61 @@
 			</v-card-title>
 			<v-card-text class="body-1">
 				<v-content>
-					<v-layout row wrap :class="[isEditing ? '' : 'pb-3']">
-						<v-flex xs3 class="grey--text text-xs-center">
-							FIRST NAME
-						</v-flex>
+					<v-layout
+						:class="[isEditing ? '' : 'pb-3']" 
+						row 
+						wrap 
+					>
+						<v-flex 
+							class="grey--text text-xs-center"
+							xs3 
+						>FIRST NAME</v-flex>
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ firstname }}</span>
 							<v-text-field
-								:error-messages="required($v.firstnameInput.required)"
-								class="pa-0 ma-0 body-1"
+								:error-messages ="required($v.firstnameInput.required)"
+								:value					="firstname"
+								class						="pa-0 ma-0 body-1"
+								v-model					="firstnameInput"
 								absolute
 								clearable
-								:value="firstname"
 								top
-								name="name"
-								id="id"
-								v-model="firstnameInput"
 								v-else
 							></v-text-field>
 						</v-flex>
 					</v-layout>
-					<v-layout row wrap :class="[isEditing ? '' : 'pb-3']">
-						<v-flex xs3 class="grey--text text-xs-center">
-							SECOND NAME
-						</v-flex>
+					<v-layout  
+						:class="[isEditing ? '' : 'pb-3']"
+						row 
+						wrap
+					>
+						<v-flex 
+							class="grey--text text-xs-center"
+							xs3 
+						>SECOND NAME</v-flex>
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ secondname }}</span>
 							<v-text-field
-								:error-messages="required($v.secondnameInput.required)"
-								class="pa-0 ma-0 body-1"
+								:error-messages	="required($v.secondnameInput.required)"
+								class						="pa-0 ma-0 body-1"
+								:value					="secondname"
+								v-model					="secondnameInput"
 								clearable
 								absolute
-								:value="secondname"
-								v-model="secondnameInput"
 								top
-								name="name"
-								id="id"
 								v-else
 							></v-text-field>
 						</v-flex>
 					</v-layout>
-					<v-layout row wrap class="">
+					<v-layout row wrap>
 						<v-flex 
 							class="grey--text text-xs-center"
 							xs3	
-						>
-							ADDRESS
-						</v-flex>
+						>ADDRESS</v-flex>
 						<v-flex xs9>
 							<span v-if="!isEditing">{{ address }}</span>
 							<v-text-field
 								class					 ="pa-0 ma-0 body-1"
-								name					 ="name"
-								id						 ="id"
 								:error-messages="required($v.addressInput.required)"
 								:value				 ="address"
 								v-model				 ="addressInput"
@@ -133,6 +135,10 @@
 </template>
 
 <script>
+
+// todo:
+// 	1.validate for !=+- symbols and etc
+
 import {required} from 'vuelidate/lib/validators'
 
 export default {
@@ -145,15 +151,15 @@ export default {
 	],
 	data () {
 		return {
-			usernameInput: this.username,
-			firstnameInput: this.firstname,
-			secondnameInput: this.secondname,
-			addressInput: this.address,
+			usernameInput		: this.username,
+			firstnameInput	: this.firstname,
+			secondnameInput	: this.secondname,
+			addressInput		: this.address,
 
-			SELECT_COLOR: '#00A6F2',
-			isChosen: false,
-			isExist: true,
-			isEditing: false
+			SELECT_COLOR : '#00A6F2',
+			isChosen		 : false,
+			isExist			 : true,
+			isEditing		 : false
 		}
 	},
 	validations: {
@@ -181,27 +187,27 @@ export default {
 		}
 	},
 	methods: {
-		// :error-messages = []
+		// fix :error-messages = []
 		required (condition) {
 			if (!condition) return 'Required';
 			else return "";   
 		},
 		onCancelEdit () {
-			this.isEditing = !this.isEditing;
-			this.isChosen = true;
+			this.isEditing 				= !this.isEditing;
+			this.isChosen 				= true;
 			//return prev info by pressing cancel
-			this.usernameInput = this.username;
-			this.firstnameInput = this.firstname;
-			this.secondnameInput = this.secondname;
-			this.addressInput = this.address;
+			this.usernameInput 		= this.username;
+			this.firstnameInput 	= this.firstname;
+			this.secondnameInput  = this.secondname;
+			this.addressInput 		= this.address;
 		},
 		onSave () {
 			this.isEditing = !this.isEditing;
 			this.$emit('update-profile', {
-				username: this.usernameInput,
-				firstname: this.firstnameInput,
-				secondname: this.secondnameInput,
-				address: this.addressInput
+				username	 : this.usernameInput,
+				firstname	 : this.firstnameInput,
+				secondname : this.secondnameInput,
+				address		 : this.addressInput
 			});
 		}
 	}
@@ -213,68 +219,3 @@ input {
 	padding: 0 !important;
 }
 </style>
-
-
-
-// <v-layout row wrap>
-// 						<v-flex xs3>
-// 							<v-layout
-// 								class="grey--text text-xs-center"
-// 								column
-// 							>
-// 								<span class="mb-2">FIRST NAME</span>
-// 								<span class="mb-2">SECOND NAME</span>
-// 								<span class="mb-2">ADDRESS</span>
-// 							</v-layout>
-// 						</v-flex>
-// 						<v-flex xs9>
-// 							<v-layout column>
-// 								<span class="mb-2" v-if="!isEditing">{{ firstname }}</span>
-// 								<v-text-field
-// 									class="pt-0 mb-2"
-// 									name="firstname"
-// 									v-else
-// 								></v-text-field>
-// 								<span class="mb-2">field 2</span>
-// 								<span class="mb-2">field 3</span>
-// 							</v-layout>
-// 						</v-flex>
-// 					</v-layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

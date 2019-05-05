@@ -50,11 +50,11 @@ export default {
 		updateProfile (userObject, id) {
 			console.log(userObject);
 			this.$store.commit('UPDATE_PROFILE', {
-				id: id,
-				username: userObject.username,
-				firstname: userObject.firstname,
+				id				: id,
+				username	: userObject.username,
+				firstname	: userObject.firstname,
 				secondname: userObject.secondname,
-				address: userObject.address
+				address		: userObject.address
 			});
 		}
 	}
