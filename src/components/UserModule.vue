@@ -5,9 +5,10 @@
 			:key						="index"
 			:id							="getUserId(index)"
 			:username				="getUsername(index)"
+			:firstname			="getFirstname(index)"
 			@delete-user		="deleteUser(getUserId(index))"
 			@update-username="updateUsername($event, getUserId(index))"
-			
+
 		></UserCard>
 	</v-content>
 </template>
@@ -29,6 +30,9 @@ export default {
 	methods: {
 		getUsername (index) {
 			return this.$store.getters.users[index]["username"];
+		},
+		getFirstname (index) {
+			return this.$store.getters.users[index]["fName"];
 		},
 		getUserId (index) {
 			return this.$store.getters.users[index]["id"];
