@@ -8,7 +8,7 @@
 			:firstname			="getFirstname(index)"
 			:secondname			="getSecondname(index)"
 			:address				="getAddress(index)"
-			@delete-user		="deleteUser(getUserId(index))"
+			@delete-user		="deleteUser(index)"
 			@update-profile ="updateProfile($event, getUserId(index))"
 		></UserCard>
 	</v-content>
@@ -42,10 +42,11 @@ export default {
 			return this.$store.getters.users[index]["address"];
 		},
 		getUserId (index) {
+			console.log(this.$store.getters.users[index]["id"]);
 			return this.$store.getters.users[index]["id"];
 		},
-		deleteUser(id) {
-			this.$store.commit('DELETE_USER', id);
+		deleteUser(index) {
+			this.$store.commit('DELETE_USER', index);
 		},
 		updateProfile (userObject, id) {
 			console.log(userObject);

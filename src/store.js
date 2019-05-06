@@ -7,21 +7,21 @@ export default new Vuex.Store({
   state: {
     users: [
       {
-        id      : 0,
+        id      : 1,
         username: 'user 1',
         fName   : 'alex',
         sName   : 'qwe',
         address : 'mt street 2-123'
       },
       {
-        id      : 1,
+        id      : 2,
         username: 'user 2',
         fName   : 'test2',
         sName   : 'test2',
         address : 'ph street 22-3'
       },
       {
-        id      : 2,
+        id      : 3,
         username: 'user 3',
         fName   : 'test3',
         sName   : 'test3',
@@ -35,10 +35,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    DELETE_USER (state, id) {
-      let index = state.users.find(
-        user => user.id === id
-      );
+    DELETE_USER (state, index) {
+      // let index = state.users.find(
+      //   user => user.id === id
+      // );
       state.users.splice(index, 1);
     },
     UPDATE_PROFILE (state, obj) {
