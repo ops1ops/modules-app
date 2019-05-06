@@ -1,13 +1,13 @@
 <template>
-  <UserModule />
+	<UserModule />
 </template>
 
 <script>
-  import UserModule from '../components/UserModule.vue'
+	import UserModule from '../components/UserModule.vue'
 
-  export default {
-    components: {
-      UserModule
-    }
-  }
+	export default {
+		components: {
+			UserModule
+		}
+	}
 </script>

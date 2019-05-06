@@ -42,6 +42,7 @@ export default new Vuex.Store({
       state.users.splice(index, 1);
     },
     UPDATE_PROFILE (state, obj) {
+      console.log("object in mutations: ", obj);
       let index = state.users.findIndex(
         user => user.id === obj.id
       );
