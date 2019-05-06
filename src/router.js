@@ -13,8 +13,8 @@ export default new Router({
       name: 'modules'
     },
     {
-      path    : '/users',
-      name    : 'users',
+      path     : '/users',
+      name     : 'users',
       component: UserModule
     }
   ]

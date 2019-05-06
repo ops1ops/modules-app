@@ -1,14 +1,14 @@
 <template>
   <v-content>
     <UserCard
-      v-for						="(user, index) in getUsers"
-      :key						="index"
-      :id							="getUserId(index)"
-      :username				="getUsername(index)"
-      :firstname			="getFirstname(index)"
-      :secondname			="getSecondname(index)"
-      :address				="getAddress(index)"
-      @delete-user		="deleteUser(index)"
+      v-for           ="(user, index) in getUsers"
+      :key            ="index"
+      :id             ="getUserId(index)"
+      :username       ="getUsername(index)"
+      :firstname      ="getFirstname(index)"
+      :secondname     ="getSecondname(index)"
+      :address        ="getAddress(index)"
+      @delete-user    ="deleteUser(index)"
       @update-profile ="updateProfile($event, getUserId(index))"
     ></UserCard>
   </v-content>
@@ -50,11 +50,11 @@ export default {
     updateProfile (userObject, id) {
       console.log(userObject);
       this.$store.commit('UPDATE_PROFILE', {
-        id				: id,
-        username	: userObject.username,
-        firstname	: userObject.firstname,
-        secondname: userObject.secondname,
-        address		: userObject.address
+        id,
+        username    : userObject.username,
+        firstname   : userObject.firstname,
+        secondname  : userObject.secondname,
+        address     : userObject.address
       });
     }
   }

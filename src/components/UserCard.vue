@@ -1,18 +1,18 @@
 <template >
   <v-content v-if="isExist">
     <v-card 
-      max-width	= "550"
-      :style		= "{ border: '4px solid ' + [isChosen ? SELECT_COLOR : 'transparent'] }"
-      class			= "mx-auto pb-3 pt-2 mb-1"
-      @click		= "isChosen = !isChosen"
+      max-width = "550"
+      :style    = "{ border: '4px solid ' + [isChosen ? SELECT_COLOR : 'transparent'] }"
+      class     = "mx-auto pb-3 pt-2 mb-1"
+      @click    = "isChosen = !isChosen"
       dark 		
     >
       <v-card-title	class="title font-weight-regular">
         <v-text-field
-          class	 					= "pa-0 ma-0 title font-weight-regular"
-          :value 					= "username"
-          v-if	 					= "isEditing"
-          v-model					= "usernameInput"
+          class           = "pa-0 ma-0 title font-weight-regular"
+          :value          = "username"
+          v-if            = "isEditing"
+          v-model         = "usernameInput"
           :error-messages = "required($v.usernameInput.required)"
           clearable
         ></v-text-field>
@@ -35,9 +35,9 @@
               <span v-if="!isEditing">{{ firstname }}</span>
               <v-text-field
                 :error-messages ="required($v.firstnameInput.required)"
-                :value					="firstname"
-                class						="pa-0 ma-0 body-1"
-                v-model					="firstnameInput"
+                :value          ="firstname"
+                class           ="pa-0 ma-0 body-1"
+                v-model         ="firstnameInput"
                 absolute
                 clearable
                 top
@@ -57,10 +57,10 @@
             <v-flex xs9>
               <span v-if="!isEditing">{{ secondname }}</span>
               <v-text-field
-                :error-messages	="required($v.secondnameInput.required)"
-                class						="pa-0 ma-0 body-1"
-                :value					="secondname"
-                v-model					="secondnameInput"
+                :error-messages ="required($v.secondnameInput.required)"
+                class           ="pa-0 ma-0 body-1"
+                :value          ="secondname"
+                v-model         ="secondnameInput"
                 clearable
                 absolute
                 top
@@ -76,10 +76,10 @@
             <v-flex xs9>
               <span v-if="!isEditing">{{ address }}</span>
               <v-text-field
-                class					 ="pa-0 ma-0 body-1"
+                class          ="pa-0 ma-0 body-1"
                 :error-messages="required($v.addressInput.required)"
-                :value				 ="address"
-                v-model				 ="addressInput"
+                :value         ="address"
+                v-model        ="addressInput"
                 absolute
                 top
                 clearable
@@ -109,9 +109,9 @@
           outline
         >CANCEL</v-btn>
         <v-btn 
-          color		="info"
-          @click	="onEdit()"
-          v-if		="!isEditing"
+          color   ="info"
+          @click  ="onEdit()"
+          v-if    ="!isEditing"
           absolute
           large
           right
@@ -119,9 +119,9 @@
           outline
         >EDIT</v-btn>
         <v-btn 
-          @click		="onSave($event); isChosen = true;"
-          :disabled	="!isEditValid"
-          color			="info"
+          @click    ="onSave($event); isChosen = true;"
+          :disabled ="!isEditValid"
+          color     ="info"
           v-else
           absolute
           large
@@ -151,15 +151,15 @@ export default {
   ],
   data () {
     return {
-      usernameInput		: this.username,
-      firstnameInput	: this.firstname,
-      secondnameInput	: this.secondname,
-      addressInput		: this.address,
+      usernameInput   : this.username,
+      firstnameInput  : this.firstname,
+      secondnameInput : this.secondname,
+      addressInput    : this.address,
 
-      SELECT_COLOR : '#00A6F2',
-      isChosen		 : false,
-      isExist			 : true,
-      isEditing		 : false
+      SELECT_COLOR  : '#00A6F2',
+      isChosen      : false,
+      isExist       : true,
+      isEditing     : false
     }
   },
   validations: {
@@ -193,30 +193,30 @@ export default {
       else return "";   
     },
     bindInputsToProps () {
-      this.usernameInput 		= this.username;
-      this.firstnameInput 	= this.firstname;
+      this.usernameInput    = this.username;
+      this.firstnameInput   = this.firstname;
       this.secondnameInput  = this.secondname;
-      this.addressInput 		= this.address;
+      this.addressInput     = this.address;
     },
     onCancelEdit () {
-      this.isEditing 				= !this.isEditing;
-      this.isChosen 				= true;
+      this.isEditing  = !this.isEditing;
+      this.isChosen   = true;
       //return prev info by pressing cancel
       this.bindInputsToProps();
     },
     onEdit () {
-      this.isEditing = !this.isEditing;
-      this.isChosen = true;
+      this.isEditing  = !this.isEditing;
+      this.isChosen   = true;
       //fix bug after delete
       this.bindInputsToProps();
     },
     onSave () {
       this.isEditing = !this.isEditing;
       this.$emit('update-profile', {
-        username	 : this.usernameInput,
-        firstname	 : this.firstnameInput,
-        secondname : this.secondnameInput,
-        address		 : this.addressInput
+        username  : this.usernameInput,
+        firstname : this.firstnameInput,
+        secondname: this.secondnameInput,
+        address   : this.addressInput
       });
     }
   }
